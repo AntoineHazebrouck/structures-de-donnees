@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class ListeTelephonique implements Iterable<ListeTelephonique> {
 	private final ElementTelephonique element;
-	private final Optional<ListeTelephonique> suivant;
+	private Optional<ListeTelephonique> suivant;
 
 	public ListeTelephonique(ElementTelephonique element) {
 		this.element = element;
@@ -19,6 +19,24 @@ public class ListeTelephonique implements Iterable<ListeTelephonique> {
 	public ListeTelephonique(ElementTelephonique element, ListeTelephonique suivant) {
 		this.element = element;
 		this.suivant = Optional.of(suivant);
+	}
+
+	public ListeTelephonique addFirst(ElementTelephonique element) {
+		return new ListeTelephonique(element, this);
+	}
+
+	public ListeTelephonique addLast(ElementTelephonique element) {
+		if (suivant.isEmpty()) {
+			suivant = Optional.of(new ListeTelephonique(element));
+		} else {
+			Iterator<ListeTelephonique> iterator = iterator();
+			ListeTelephonique current = null;
+			while (iterator.hasNext()) {
+				current = iterator.next();
+			} ;
+			current.suivant = Optional.of(new ListeTelephonique(element));
+		}
+		return this;
 	}
 
 	public Optional<ListeTelephonique> recherche(String nom) {

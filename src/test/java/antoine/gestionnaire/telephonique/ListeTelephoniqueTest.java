@@ -6,18 +6,16 @@ import org.junit.jupiter.api.Test;
 
 class ListeTelephoniqueTest {
 	final ListeTelephonique LISTE = new ListeTelephonique(
-		new ElementTelephonique("Antoine", "06"), 
-		new ListeTelephonique(
-			new ElementTelephonique("Eliso", "07"),
+			new ElementTelephonique("Antoine", "06"),
 			new ListeTelephonique(
-				new ElementTelephonique("Caca", "08")
-			)
-		)
-	);
+					new ElementTelephonique("Eliso", "07"),
+					new ListeTelephonique(
+							new ElementTelephonique("Caca", "08"))));
 
 	@Test
 	void testToString() {
-		assertThat(LISTE).hasToString("[ElementTelephonique(nom=Antoine, telephone=06), ElementTelephonique(nom=Eliso, telephone=07), ElementTelephonique(nom=Caca, telephone=08)]");
+		assertThat(LISTE).hasToString(
+				"[ElementTelephonique(nom=Antoine, telephone=06), ElementTelephonique(nom=Eliso, telephone=07), ElementTelephonique(nom=Caca, telephone=08)]");
 	}
 
 	@Test
@@ -31,7 +29,24 @@ class ListeTelephoniqueTest {
 	@Test
 	void testRecherche() {
 		assertThat(LISTE.recherche("Caca")).isPresent().contains(new ListeTelephonique(
-			new ElementTelephonique("Caca", "08")
-		));
+				new ElementTelephonique("Caca", "08")));
+	}
+
+	@Test
+	void testAddFirst() {
+		var oneElement = new ListeTelephonique(new ElementTelephonique("Caca", "06"));
+		var eliso = new ElementTelephonique("Eliso", "07");
+
+		assertThat(oneElement.addFirst(eliso)).isEqualTo(new ListeTelephonique(eliso, oneElement));
+	}
+
+	@Test
+	void testAddLast() {
+		var oneElement = new ListeTelephonique(new ElementTelephonique("Caca", "06"));
+		var eliso = new ElementTelephonique("Eliso", "07");
+
+		assertThat(oneElement.addLast(eliso)).isEqualTo(new ListeTelephonique(
+				new ElementTelephonique("Caca", "06"),
+				new ListeTelephonique(eliso)));
 	}
 }
