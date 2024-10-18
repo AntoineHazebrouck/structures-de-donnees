@@ -1,13 +1,13 @@
 package antoine.gestionnaire.telephonique;
 
+import java.util.Iterator;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-public class ListeTelephonique {
+public class ListeTelephonique implements Iterable<ListeTelephonique> {
 	private final ElementTelephonique element;
 	private final Optional<ListeTelephonique> suivant;
 
@@ -21,28 +21,55 @@ public class ListeTelephonique {
 		this.suivant = Optional.of(suivant);
 	}
 
+	public Optional<ListeTelephonique> recherche(String nom) {
+		Optional<ListeTelephonique> value = Optional.empty();
+
+		for (ListeTelephonique node : this) {
+			if (node.element.getNom().equals(nom)) value = Optional.of(node);
+		}
+
+		return value;
+	}
+
 	public int size() {
-		final AtomicInteger count = new AtomicInteger(1);
+		int count = 1;
 
-		iterateOver(element -> count.incrementAndGet());
+		for (ListeTelephonique node : this) {
+			count++;
+		}
 
-		return count.intValue();
+		return count;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder("[" + element);
 
-		iterateOver(element -> builder.append(", " + element));
+		for (ListeTelephonique node : this) {
+			builder.append(", " + node.element);
+		}
 
 		return builder.toString() + "]";
 	}
 
-	private void iterateOver(Consumer<ElementTelephonique> code) {
-		Optional<ListeTelephonique> next = suivant;
-		while (next.isPresent()) {
-			code.accept(next.get().getElement());
-			next = next.get().getSuivant();
+	@Override
+	public Iterator<ListeTelephonique> iterator() {
+		return new ListeIterator(this);
+	}
+
+	@AllArgsConstructor
+	private final class ListeIterator implements Iterator<ListeTelephonique> {
+		private ListeTelephonique current;
+
+		@Override
+		public boolean hasNext() {
+			return current.suivant.isPresent();
+		}
+
+		@Override
+		public ListeTelephonique next() {
+			current = current.suivant.get();
+			return current;
 		}
 	}
 }

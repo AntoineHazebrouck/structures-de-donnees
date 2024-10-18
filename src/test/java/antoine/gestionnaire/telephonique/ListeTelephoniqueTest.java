@@ -27,4 +27,11 @@ class ListeTelephoniqueTest {
 		assertThat(oneElement.size()).isEqualTo(1);
 		assertThat(LISTE.size()).isEqualTo(3);
 	}
+
+	@Test
+	void testRecherche() {
+		assertThat(LISTE.recherche("Caca")).isPresent().contains(new ListeTelephonique(
+			new ElementTelephonique("Caca", "08")
+		));
+	}
 }
