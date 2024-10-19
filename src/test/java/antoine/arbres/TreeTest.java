@@ -46,4 +46,9 @@ public class TreeTest {
 	void testSize() {
 		assertThat(TREE().size()).isEqualTo(4);
 	}
+
+	@Test
+	void testSum() {
+		assertThat(TREE().sum()).isEqualTo(5 + 7 + 10 + 15);
+	}
 }
