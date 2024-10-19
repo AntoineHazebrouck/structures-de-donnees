@@ -1,9 +1,11 @@
 package antoine.arbres;
 
+import java.util.Iterator;
+
 import lombok.Data;
 
 @Data
-public class Tree {
+public class Tree implements Iterable<Integer> {
 	private final int value;
 	private Tree left;
 	private Tree right;
@@ -42,4 +44,36 @@ public class Tree {
 	public boolean isLeaf() {
 		return left == null && right == null;
 	}
+
+	@Override
+	public String toString() {
+		if (isLeaf()) {
+			return "";
+		} else {
+			return left.toString() + right.toString();
+		}
+	}
+
+	@Override
+	public Iterator<Integer> iterator() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+	}
+
+	// @AllArgsConstructor
+	// private class TreeIterator implements Iterator<Integer> {
+	// 	private Tree current;
+
+	// 	@Override
+	// 	public boolean hasNext() {
+	// 		current.
+	// 	}
+
+	// 	@Override
+	// 	public Integer next() {
+	// 		// TODO Auto-generated method stub
+	// 		throw new UnsupportedOperationException("Unimplemented method 'next'");
+	// 	}
+
+	// }
 }
