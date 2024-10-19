@@ -22,6 +22,18 @@ public class Tree implements Iterable<Integer> {
 		this.right = right;
 	}
 
+	public boolean recherche(int search) {
+		if (search < value) {
+			if (left == null) return false;
+			return left.recherche(search);
+		} else if (search > value) {
+			if (right == null) return false;
+			return right.recherche(search);
+		} else {
+			return true;
+		}
+	}
+
 	public void add(Integer value) {
 		if (this.value == value) {
 			return;
@@ -47,11 +59,7 @@ public class Tree implements Iterable<Integer> {
 
 	@Override
 	public String toString() {
-		if (isLeaf()) {
-			return "";
-		} else {
-			return left.toString() + right.toString();
-		}
+		return (left != null ? left.toString() + ", " : "") + value + (right != null ? ", " + right.toString() : "");
 	}
 
 	@Override
@@ -62,18 +70,18 @@ public class Tree implements Iterable<Integer> {
 
 	// @AllArgsConstructor
 	// private class TreeIterator implements Iterator<Integer> {
-	// 	private Tree current;
+	// private Tree current;
 
-	// 	@Override
-	// 	public boolean hasNext() {
-	// 		current.
-	// 	}
+	// @Override
+	// public boolean hasNext() {
+	// current.
+	// }
 
-	// 	@Override
-	// 	public Integer next() {
-	// 		// TODO Auto-generated method stub
-	// 		throw new UnsupportedOperationException("Unimplemented method 'next'");
-	// 	}
+	// @Override
+	// public Integer next() {
+	// // TODO Auto-generated method stub
+	// throw new UnsupportedOperationException("Unimplemented method 'next'");
+	// }
 
 	// }
 }
