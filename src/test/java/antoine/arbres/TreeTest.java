@@ -41,4 +41,9 @@ public class TreeTest {
 		assertThat(TREE().recherche(7)).isTrue();
 		assertThat(TREE().recherche(6)).isFalse();
 	}
+
+	@Test
+	void testSize() {
+		assertThat(TREE().size()).isEqualTo(4);
+	}
 }

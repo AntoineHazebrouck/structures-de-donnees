@@ -22,6 +22,10 @@ public class Tree implements Iterable<Integer> {
 		this.right = right;
 	}
 
+	public int size() {
+		return (left != null ? left.size() : 0) + 1 + (right != null ? right.size() : 0);
+	}
+
 	public boolean recherche(int search) {
 		if (search < value) {
 			if (left == null) return false;
