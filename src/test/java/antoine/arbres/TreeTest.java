@@ -9,13 +9,17 @@ public class TreeTest {
 	void testAdd() {
 		Tree tree = new Tree(new Tree(5), 10, new Tree(15));
 
+		tree.add(5);
+
+		assertThat(tree).isEqualTo(new Tree(new Tree(5), 10, new Tree(15)));
+
 		tree.add(7);
 
 		assertThat(tree).isEqualTo(
-			new Tree(
-				new Tree(null, 5, new Tree(7)), 
-				10, 
-				new Tree(15))
-		);
+				new Tree(
+						new Tree(null, 5, new Tree(7)),
+						10,
+						new Tree(15)));
+
 	}
 }

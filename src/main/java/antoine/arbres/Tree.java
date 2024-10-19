@@ -21,6 +21,9 @@ public class Tree {
 	}
 
 	public void add(Integer value) {
+		if (this.value == value) {
+			return;
+		}
 		if (value > this.value) {
 			if (isLeaf()) {
 				right = new Tree(value);
