@@ -22,6 +22,12 @@ public class Tree implements Iterable<Integer> {
 		this.right = right;
 	}
 
+	public int max() {
+		if (right != null)
+			return right.max();
+		else return value;
+	}
+
 	public int sum() {
 		return (left != null ? left.sum() : 0) + value + (right != null ? right.sum() : 0);
 	}

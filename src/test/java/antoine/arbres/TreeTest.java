@@ -51,4 +51,9 @@ public class TreeTest {
 	void testSum() {
 		assertThat(TREE().sum()).isEqualTo(5 + 7 + 10 + 15);
 	}
+
+	@Test
+	void testMax() {
+		assertThat(TREE().max()).isEqualTo(15);
+	}
 }
