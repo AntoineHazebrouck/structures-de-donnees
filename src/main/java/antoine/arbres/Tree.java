@@ -53,13 +53,13 @@ public class Tree implements Iterable<Integer> {
 			return;
 		}
 		if (value > this.value) {
-			if (isLeaf()) {
+			if (right == null) {
 				right = new Tree(value);
 			} else {
 				right.add(value);
 			}
 		} else if (value < this.value) {
-			if (isLeaf()) {
+			if (left == null) {
 				left = new Tree(value);
 			} else {
 				left.add(value);
