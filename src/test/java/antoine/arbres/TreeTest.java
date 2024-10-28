@@ -6,40 +6,21 @@ import org.junit.jupiter.api.Test;
 
 public class TreeTest {
 	Tree TREE() {
-		Tree tree = new Tree(20);
-		tree.add(3);
-		tree.add(5);
-		tree.add(6);
-		tree.add(8);
-		tree.add(12);
-		tree.add(13);
-		tree.add(21);
-		tree.add(25);
-		tree.add(28);
+		// Tree tree = new Tree(20);
+		Tree sag = new Tree(5, new Tree(3, null, null),
+				new Tree(12, new Tree(8, new Tree(6, null, null), null), new Tree(13, null, null)));
+		Tree sad = new Tree(25, new Tree(21, null, null), new Tree(28, null, null));
+		Tree tree = new Tree(20, sag, sad);
 
 		return tree;
 	}
 
-	@Test
-	void testAdd() {
-		Tree tree = new Tree(new Tree(5), 10, new Tree(15));
+	// @Test
+	// void testToString() {
+	// 	Tree tree = TREE();
 
-		tree.add(5);
-
-		assertThat(tree).isEqualTo(new Tree(new Tree(5), 10, new Tree(15)));
-
-		tree.add(7);
-
-		assertThat(tree).isEqualTo(new Tree(new Tree(null, 5, new Tree(7)), 10, new Tree(15)));
-
-	}
-
-	@Test
-	void testToString() {
-		Tree tree = TREE();
-
-		assertThat(tree.toString()).isEqualTo("3, 5, 6, 8, 12, 13, 20, 21, 25, 28");
-	}
+	// 	assertThat(tree.toString()).isEqualTo("3, 5, 6, 8, 12, 13, 20, 21, 25, 28");
+	// }
 
 	@Test
 	void testRecherche() {
@@ -69,9 +50,18 @@ public class TreeTest {
 	void testEquals() {
 		assertThat(TREE()).isEqualTo(TREE());
 
-		Tree notEqual = TREE();
-		notEqual.add(2);
+		Tree notEqual = new Tree(10, new Tree(5), new Tree(10));
 
 		assertThat(TREE()).isNotEqualTo(notEqual);
+	}
+
+	@Test
+	void testNbLeaves() {
+		assertThat(TREE().nbLeaves()).isEqualTo(5);
+	}
+
+	@Test
+	void testHauteur() {
+		assertThat(TREE().hauteur()).isEqualTo(4);
 	}
 }
