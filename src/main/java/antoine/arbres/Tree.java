@@ -89,9 +89,9 @@ public class Tree {
 	public boolean equals(Object obj) {
 		Tree other = (Tree) obj;
 
-		return (this.left != null && other.left != null ? left.equals(other.left) : true) && 
-		this.value == other.value && 
-		(this.right != null && other.right != null ? right.equals(other.right) : true);
+		return (this.left != null && other.left != null ? left.equals(other.left) : true) &&
+				this.value == other.value &&
+				(this.right != null && other.right != null ? right.equals(other.right) : true);
 	}
 
 }
